@@ -1,26 +1,75 @@
-#  Как работать с репозиторием финального задания
+![.github/workflows/main.yml](https://github.com/DmitryGlazkov/kittygram_final/actions/workflows/main.yml/badge.svg)
 
-## Что нужно сделать
+# Kittygram
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
 
-## Как проверить работу с помощью автотестов
+## Описание проекта:
+Социальная сеть для обмена фотографиями домашних питомцев. Позволят размещать фотографии своих питомцев, с указанием клички, года рождения, окраса и достижений, а также просматривать фотографии питомцев, добавленных другими пользователями. Доступна регистрация аккаунта, редактирование и удаление ранее внесённых данных, размещённых на сервисе питомцев.
 
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
+## Использованные технологии:
+ - Python
+ - Django
+ - Django REST framework
+ - Nginx
+ - Gunicorn
+ - Docker
+ - PostgreSQL
+ - React
+ - Certbot
+
+## Как развернуть проект:
+
+##### 1. Клонируйте репозиторий:
+```
+git clone git@github.com:DmitryGlazkov/kittygram_final.git
 ```
 
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
+##### 2. Создайте и активируйте виртуальное окружение:
+На Linux:
+```
+python3 -m venv env
+source env/bin/activate
+```
 
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
+На Windows:
+```
+python -m venv venv
+source venv/Scripts/activate
+```
 
-## Чек-лист для проверки перед отправкой задания
+##### 3. В корневой директории создайте файл .env, внесите следующие данные:
+```
+POSTGRES_USER=kittygram_user
+POSTGRES_PASSWORD=kittygram_password
+POSTGRES_DB=kittygram
+DB_HOST=db
+DB_PORT=5432
+SECRET_KEY=<your secret key>
+DEBUG=True
+```
 
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+##### 4. Установите зависимости:
+```
+cd backend
+pip install -r requirements.txt
+```
+
+##### 5. Выполните миграции:
+```
+python manage.py migrate
+```
+
+##### 6. При необходимости создайте суперпользователя:
+```
+python manage.py createsuperuser
+```
+
+##### 7. Запустите локальный сервер:
+```
+python manage.py runserver
+```
+
+
+## Автор
+
+[Дмитрий Глазков](https://github.com/DmitryGlazkov)

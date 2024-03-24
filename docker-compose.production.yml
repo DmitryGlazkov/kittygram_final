@@ -18,6 +18,8 @@ services:
     volumes:
       - media:/app/media
       - static:/backend_static
+    depends_on:
+      - db
 
   frontend:
     image: dmitryglazkov/kittygram_frontend
@@ -34,3 +36,6 @@ services:
     volumes:
       - static:/staticfiles
       - media:/media
+    depends_on:
+      - backend
+      - frontend
